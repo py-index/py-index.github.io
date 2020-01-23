@@ -16,7 +16,7 @@
 		}
 		var url = decodeURIComponent(get('state'));
 		var code = get('code');
-		var c = url.find('?') !== -1 ? '&' : '?';
+		var c = url.indexOf('?') !== -1 ? '&' : '?';
 		window.location = url + c + "code=" + code;
 	</script>
 </body>
