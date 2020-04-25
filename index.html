@@ -2,22 +2,35 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <style>html {font-size: 14px;color: #333333;}
+    p {padding-bottom: 20px;}
+    * {margin: 0;padding: 0;}</style>
 </head>
 <body>
-	<script>
-		function get(variable){
-		       var query = window.location.search.substring(1);
-		       var vars = query.split("&");
-		       for (var i=0;i<vars.length;i++) {
-		               var pair = vars[i].split("=");
-		               if(pair[0] == variable){return pair[1];}
-		       }
-		       return(false);
-		}
-		var url = decodeURIComponent(get('state'));
-		var code = get('code');
-		var c = url.indexOf('?') !== -1 ? '&' : '?';
-		window.location = url + c + "code=" + code;
-	</script>
+<body style="line-height:1.2; font-size: 1rem;  text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;background: #ffffff;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    box-sizing: border-box;">
+<div id="code" style="width: 600px;border: 2px dotted #f5f5f5;margin: 10% auto 0 auto; padding: 10px;word-break: break-all;color: #777777;display: none;"></div>
+
+<script>
+    function get(variable){
+        let query = window.location.search.substring(1);
+        let vars = query.split("&");
+        for (let i=0;i<vars.length;i++) {
+            let pair = vars[i].split("=");
+            if(pair[0] === variable){return pair[1];}
+        }
+        return false;
+    }
+    let state = get('state');
+    let code = get('code');
+    if (state === 'debug'){
+        document.getElementById('code').innerHTML = code;
+        document.getElementById('code').style.display = 'block';
+    }else{
+        let url = decodeURIComponent(state);
+        let c = url.indexOf('?') !== -1 ? '&' : '?';
+        window.location = url + c + "code=" + code;
+    }
+</script>
 </body>
 </html>
